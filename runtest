@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+docker build -t uppercase-combination:latest .
+
+docker run uppercase-combination:latest
