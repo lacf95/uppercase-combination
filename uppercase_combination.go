@@ -8,14 +8,19 @@ import (
 
 func UppercaseCombination(str string) []string {
 	length := len(str)
-	combinations := kCombination(length)
-	result := stringSlice(combinations, str)
+	baseForm := strings.ToLower(str)
+	combinationsLength := kCombination(length)
+	combinations := make([]string, combinationsLength)
+	combinations[0] = baseForm
 
 	for i := 0; i < length; i++ {
-		interval := combinationInterval(combinations, i + 1)
+		interval := combinationInterval(combinationsLength, i + 1)
 		counter := interval
-		for counter < combinations {
-			result[counter] = uppercaseRuneAt(result[counter], i)
+		for counter < combinationsLength {
+			if combinations[counter] == "" {
+				combinations[counter] = baseForm
+			}
+			combinations[counter] = uppercaseRuneAt(combinations[counter], i)
 
 			counter++
 			if counter%interval == 0 {
@@ -23,7 +28,7 @@ func UppercaseCombination(str string) []string {
 			}
 		}
 	}
-	return result
+	return combinations
 }
 
 func kCombination(n int) int {
@@ -32,15 +37,6 @@ func kCombination(n int) int {
 
 func combinationInterval(n, i int) int {
 	return int(float64(n) / math.Pow(float64(2), float64(i)))
-}
-
-func stringSlice(length int, str string) []string {
-	result := make([]string, length)
-	baseForm := strings.ToLower(str)
-	for i := 0; i < length; i++ {
-		result[i] = baseForm
-	}
-	return result
 }
 
 func uppercaseRuneAt(str string, index int) string {
