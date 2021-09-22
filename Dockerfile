@@ -4,4 +4,4 @@ WORKDIR /var/app
 
 COPY . ./
 
-CMD ["go", "test"]
+CMD ["go", "test", "-bench=."]

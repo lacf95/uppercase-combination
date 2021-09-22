@@ -24,3 +24,13 @@ func TestUppercaseCombination(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkUppercaseCombination(b *testing.B) {
+	type test struct {
+		input string
+	}
+
+	t := test{"abcdefghijklmnopqrstu"}
+
+	UppercaseCombination(t.input)
+}
